@@ -29,5 +29,14 @@ public class ArticleService {
 		return repository.findAll();
 		
 	}
+	
+	/**
+	 * 投稿されたデータの格納.
+	 * @param article
+	 */
+	public void save(Article article) {
+		
+		 repository.save(article);
+	}
 
 }
