@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.moover.article_exercise.domain.Article;
+import jp.co.moover.article_exercise.domain.Comment;
 import jp.co.moover.article_exercise.service.ArticleService;
+import jp.co.moover.article_exercise.service.CommentService;
 
 /**
 	投稿内容やコメントデータを取得格納する指示や、トップ画面の表示を行う.
@@ -21,6 +23,9 @@ import jp.co.moover.article_exercise.service.ArticleService;
 public class ArticleController {
 	@Autowired
 	private ArticleService service;
+	
+	@Autowired
+	private CommentService commentService;
 	
 	@ModelAttribute
 	public ArticleForm setUp(){
@@ -36,6 +41,10 @@ public class ArticleController {
 	public String index(Model model) {
 		
 	 	List<Article> articleList = service.findAll();
+	 	for(Article article: articleList){
+	 		List<Comment> commentList= commentService.findByArticleId(article.getId());
+	 		article.setCommentList(commentList);
+	 		}
 	 	model.addAttribute("articleList",articleList);
 		return "ArticleTop";
 	}

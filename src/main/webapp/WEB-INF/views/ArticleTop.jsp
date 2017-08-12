@@ -21,6 +21,15 @@
 	投稿ID：<c:out value="${article.id}"/><br>
 	投稿者名:<c:out value="${article.name}"/><br>
 	投稿内容：<c:out value="${article.content}"/><br>
+	<br>
+	<hr>
+	<c:forEach var="comment" items="${article.commentList}">
+		コメントID：<c:out value="${comment.id}"/><br>
+		コメント者名:<c:out value="${comment.name}"/><br>
+		コメント内容:<c:out value="${comment.content}"/><br>
+		<hr>
+	</c:forEach>
+	<hr>
 	<hr>
 </c:forEach>
 </body>
